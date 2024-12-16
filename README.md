@@ -73,4 +73,4 @@ This project is shared for educational purposes only, and the author does not as
 This little add-on was only possibile thanks to the amazing work Josef Zweck (https://github.com/zweckj) did for the La Marzocco integration into Home Assistant: https://github.com/zweckj/lamarzocco
 Thanks to him, Home Assistant and ESPHome!
 
-Feel free to suggest improvements or report issues via GitHub. Happy brewing! ☕
+Happy brewing! ☕
