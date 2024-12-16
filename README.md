@@ -3,14 +3,14 @@
 This repository contains scripts and configuration files designed to enhance the La Marzocco Micra experience. These add-ons allow you to integrate the espresso machine into a smart home environment with **Home Assistant** and **ESPHome**, enabling monitoring and automation capabilities.
 
 
-## **Demonstration Video**
-
-[Watch the demonstration video](https://raw.githubusercontent.com/TiStef/La-Marzocco-Micra-Mods/main/micra_ESP32.mp4)
+#### **Demonstration Video**: [Watch the demonstration video](https://raw.githubusercontent.com/TiStef/La-Marzocco-Micra-Mods/main/micra_ESP32.mp4)
 
 
-Setting up the system requires some familiarity with network configurations and basic coding, but this guide will walk you through the necessary steps.
+
 
 ---
+
+Setting up the system requires some familiarity with network configurations and basic coding, but this guide will walk you through the necessary steps.
 
 ## **Home Assistant Hub**
 
