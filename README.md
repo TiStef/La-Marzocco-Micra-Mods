@@ -15,7 +15,9 @@ The video below demonstrates the board's functionality and its integration with 
 
 ## **Demonstration Video**
 
-[![Watch the video](https://via.placeholder.com/800x400.png?text=Click+to+watch+the+video)](https://raw.githubusercontent.com/TiStef/La-Marzocco-Micra-Mods/main/micra_ESP32.mp4)
+## **Demonstration Video**
+
+![Demo Video](demo.gif)
 
 [Watch the demonstration video](https://raw.githubusercontent.com/TiStef/La-Marzocco-Micra-Mods/main/micra_ESP32.mp4)
 
