@@ -1,0 +1,185 @@
+substitutions:
+  device_name: espnew
+  device_board: esp32dev
+  flash_size: 16MB
+
+<<: !include common/base.yaml
+
+time:
+  - platform: homeassistant
+    id: ha_time
+
+# make sure state persists after 10sec of operation:
+#preferences:
+#  flash_write_interval: 10s
+
+globals:
+  - id: shot_timer_value
+    type: std::string
+    restore_value: no
+    initial_value: '"Waiting for data…"' # Corrected initial value
+  - id: last_update_time
+    type: unsigned long
+    restore_value: no
+    initial_value: "0"
+
+script:
+  - id: update_display
+    then:
+      - lambda: |-
+          id(shottimer_display).update();
+
+switch:
+  - platform: homeassistant
+    id: micra_power
+    entity_id: switch.mrXXXXX # put you HA sensor id for the Micra power switch
+  - platform: homeassistant
+    id: steam_boiler
+    entity_id: switch.mrXXXXX_steam_boiler # put you HA sensor id for the Micra boiler switch
+
+binary_sensor:
+  - platform: gpio
+    id: micra_power_switch
+    name: "Micra Power Switch"
+    pin:
+      number: GPIO35
+      inverted: true
+    on_click:
+      then:
+        - switch.toggle: micra_power
+  - platform: gpio
+    id: micra_steam_switch
+    pin:
+      number: GPIO0
+      inverted: true
+      mode: INPUT_PULLUP
+    name: "Micra Steam Boiler Switch"
+    on_click:
+      then:
+        - switch.toggle: steam_boiler
+
+text_sensor:
+  - platform: homeassistant
+    id: shot_timer_sensor
+    entity_id: sensor.mrXXXXX_shot_timer # put you HA sensor id for the Micra shot timer sensor
+    on_value:
+      then:
+        - lambda: |-
+            id(shot_timer_value) = x;
+            id(last_update_time) = millis();  // Record the current time in milliseconds
+
+spi:
+  clk_pin: GPIO18
+  mosi_pin: GPIO19
+
+display:
+  - platform: st7789v
+    id: shottimer_display
+    model: TTGO TDisplay 135x240
+    update_interval: 1s
+    auto_clear_enabled: true
+    backlight_pin: GPIO4
+    cs_pin: GPIO5
+    dc_pin: GPIO16
+    reset_pin: GPIO23
+    rotation: 90
+    lambda: |-
+      // Clear the screen
+      //it.fill(COLOR_BLACK);
+
+      // Display the title
+      //it.printf(10, 10, id(latoblackheader), WHITE, "La Marzocco Micra");
+      // Display the fixed title at the top
+      it.printf(it.get_width(), 0, id(latoblackheader), WHITE,TextAlign::TOP_RIGHT, "Micra Shot Timer");
+      it.image(10, 42, id(my_image2));
+      it.image(10, 0, id(my_image));
+
+      // Convert shot_timer_value to an integer and add 1 second
+      int seconds = atoi(id(shot_timer_value).c_str()) + 1;
+
+      // Get the current time
+      unsigned long current_time = millis();
+
+      // Check if the timer has been updated in the last 5 seconds
+      if (current_time - id(last_update_time) < 5000) {
+        // Display the timer value in larger text below the title
+        it.printf(130, 40, id(lato), GREEN, "%d sec", seconds);
+      } else {
+        // Display the ready message
+        
+        it.printf(130, 40, id(latoblackheader), ORANGE, "..ready!");
+        
+      }
+
+image:
+  - file: "image.png"
+    id: my_image
+    resize: 70x70
+    type: RGB24
+  - file: "marz.png"
+    id: my_image2
+    type: RGB24
+    resize: 170x170
+
+font:
+  - file:
+      type: gfonts
+      family: Lato
+      weight: 400
+    id: lato
+    size: 30
+  - file:
+      type: gfonts
+      family: Lato
+      weight: 700
+    id: latobold
+    size: 24
+  - file:
+      type: gfonts
+      family: Lato
+      weight: 900
+    id: latoblack
+    size: 30
+  - file:
+      type: gfonts
+      family: Lato
+      weight: 400
+    id: latoblackheader
+    size: 18
+
+color:
+  - id: WHITE
+    red: 100%
+    green: 100%
+    blue: 100%
+    white: 100%
+  - id: RED
+    red: 100%
+    green: 0%
+    blue: 0%
+    white: 0%
+  - id: GREEN
+    red: 0%
+    green: 100%
+    blue: 0%
+    white: 0%
+  - id: BLUE
+    red: 0%
+    green: 0%
+    blue: 100%
+    white: 0%
+  - id: YELLOW
+    red: 100%
+    green: 100%
+    blue: 0%
+    white: 0%
+  - id: ORANGE
+    red: 100%
+    green: 65%
+    blue: 0%
+    white: 0%
+  - id: BLACK
+    red: 0%
+    green: 0%
+    blue: 0%
+    white: 0%
