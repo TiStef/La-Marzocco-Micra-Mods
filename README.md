@@ -2,9 +2,9 @@
 
 This repository contains scripts and configuration files designed to enhance the La Marzocco Micra experience. These add-ons allow you to integrate the espresso machine into a smart home environment with **Home Assistant** and **ESPHome**, enabling monitoring and automation capabilities.
 
-In this particular project we capture the text sensor info broadcasted from the LM Micra to Home Assistant, and display the shot timer entity into the LilyGO TTGO T-Display screen.
-Furthermore we can switch the machine ON/OFF via the GPIO35 button as well as turning ON/OFF the steam boiler using GPIO0 button.
-The video shows the functionality of the board:
+In this project, the text sensor data broadcasted by the La Marzocco Micra is captured and integrated into Home Assistant. The shot timer entity is then displayed on the **LilyGO TTGO T-Display** screen, providing a real-time visualization of brewing activity. Additionally, the setup enables control of the machine's key functionalities: the **GPIO35 button** allows switching the machine ON/OFF, while the **GPIO0 button** is used to toggle the steam boiler.
+
+The accompanying video demonstrates the complete functionality of the system in action:
 
 [Watch the demonstration video](https://raw.githubusercontent.com/TiStef/La-Marzocco-Micra-Mods/main/micra_ESP32.mp4)
 
