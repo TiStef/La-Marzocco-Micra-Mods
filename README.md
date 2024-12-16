@@ -22,7 +22,7 @@ The video below demonstrates the board's functionality and its integration with 
 
 Setting up the system requires some familiarity with network configurations and basic coding, but this guide will walk you through the necessary steps.
 
-## **Home Assistant Hub**
+### **Home Assistant Hub**
 
 To get started, you’ll need to set up a **Home Assistant (HA)** hub. Home Assistant is an open-source home automation platform that acts as the central control system for all smart devices.
 
@@ -32,14 +32,12 @@ To get started, you’ll need to set up a **Home Assistant (HA)** hub. Home Assi
 
 ---
 
-## **ESPHome**
+### **ESPHome**
 
 To integrate an **ESP32 board** with Home Assistant, this project uses **ESPHome**—a simple yet powerful platform for managing ESP-based devices. ESPHome is fully integrated into Home Assistant and requires only a YAML configuration file to get started.
 
-### **Why ESPHome?**
 ESPHome simplifies communication between the ESP32 and Home Assistant by abstracting low-level details, making it accessible for beginners and robust enough for advanced users.
-
-### **How to Set Up ESPHome**
+How to Set Up ESPHome:
 1. Install ESPHome: [ESPHome Getting Started Guide](https://esphome.io/guides/getting_started_command_line).
 2. Flash the ESP32 board with your configuration file using ESPHome CLI or another flashing method.
 
@@ -62,7 +60,7 @@ This project requires just a few components:
 ## **Disclaimer**
 Recreating this project involves working with potentially hazardous components, such as batteries and electrical circuits. It is strongly advised that only individuals with sufficient expertise in handling such components attempt to replicate this project.
 
-### **Important Notes**
+**Important Notes**
 - The author is not responsible for any damage to you, your devices, or your surroundings caused by recreating this project or any part of it.
 - If you choose to replicate this project, you do so entirely at your own risk.
 - This project involves working with electronic components and batteries, which may pose safety risks if not handled properly.
