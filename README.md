@@ -22,15 +22,13 @@ The video below demonstrates the board's functionality and its integration with 
 
 Setting up the system requires some familiarity with network configurations and basic coding, but this guide will walk you through the necessary steps.
 
-### **Home Assistant Hub**
+#### **Home Assistant Hub**
 
 To get started, you’ll need to set up a **Home Assistant (HA)** hub. Home Assistant is an open-source home automation platform that acts as the central control system for all smart devices.
 
 1. Create an account at [Home Assistant](https://www.home-assistant.io).
 2. Set up a dedicated server for the HA hub. A **Raspberry Pi** is a popular choice, offering simplicity and affordability.
 3. Follow the official installation guide for Raspberry Pi: [Home Assistant Raspberry Pi Installation](https://www.home-assistant.io/installation/raspberrypi).
-
----
 
 ### **ESPHome**
 
@@ -41,11 +39,12 @@ How to Set Up ESPHome:
 1. Install ESPHome: [ESPHome Getting Started Guide](https://esphome.io/guides/getting_started_command_line).
 2. Flash the ESP32 board with your configuration file using ESPHome CLI or another flashing method.
 
+The YAML file in the folder shows you how I configured mine. Feel free to modify it according to your needs.
 Once configured, the ESP32 board will communicate seamlessly with your Home Assistant hub.
 
 ---
 
-## **Parts List**
+### **Parts List**
 
 This project requires just a few components:
 1. **ESP32 Board**  
