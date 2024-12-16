@@ -13,6 +13,9 @@ This project integrates the La Marzocco Micra with Home Assistant and an ESP32-b
 
 The video below demonstrates the board's functionality and its integration with the La Marzocco Micra:
 
+## **Demonstration Video**
+
+[![Watch the video](https://via.placeholder.com/800x400.png?text=Click+to+watch+the+video)](https://raw.githubusercontent.com/TiStef/La-Marzocco-Micra-Mods/main/micra_ESP32.mp4)
 
 [Watch the demonstration video](https://raw.githubusercontent.com/TiStef/La-Marzocco-Micra-Mods/main/micra_ESP32.mp4)
 
