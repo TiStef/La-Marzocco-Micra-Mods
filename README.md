@@ -5,7 +5,7 @@ This repository contains scripts and configuration files designed to enhance the
 
 ## **Demonstration Video**
 
-[Watch the demonstration video](https://raw.githubusercontent.com/TiStef/La-Marzocco-Micra-Mods/main//micraESP32.mp4)
+[Watch the demonstration video](https://raw.githubusercontent.com/TiStef/La-Marzocco-Micra-Mods/main/micra_ESP32.mp4)
 
 
 Setting up the system requires some familiarity with network configurations and basic coding, but this guide will walk you through the necessary steps.
