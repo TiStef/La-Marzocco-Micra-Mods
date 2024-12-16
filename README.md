@@ -60,16 +60,13 @@ This project requires just a few components:
 ---
 
 ## **Disclaimer**
-
-Disclaimer and Warning
-
 Recreating this project involves working with potentially hazardous components, such as batteries and electrical circuits. It is strongly advised that only individuals with sufficient expertise in handling such components attempt to replicate this project.
 
 Important Notes:
 	•	The author is not responsible for any damage to you, your devices, or your surroundings caused by recreating this project or any part of it.
 	•	If you choose to replicate this project, you do so entirely at your own risk.
 	•	This project involves working with electronic components and batteries, which may pose safety risks if not handled properly.
-  • Ensure you follow all safety guidelines and consult the board’s documentation before proceeding
+  	•       Ensure you follow all safety guidelines and consult the board’s documentation before proceeding
 
 This project is shared for educational purposes only, and the author does not assume any liability for its use or misuse.
 
