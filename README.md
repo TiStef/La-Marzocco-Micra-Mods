@@ -11,7 +11,7 @@ This project integrates the La Marzocco Micra with Home Assistant and an ESP32-b
   - **GPIO35 Button (ON CLICK)**: Toggles the machine ON/OFF directly from the board.
   - **GPIO0 Button (ON CLICK)**: Enables or disables the steam boiler.
  
-- **ESP32 board Deep Sleep funcionality**
+- **ESP32 board Deep Sleep funcionality**:
   Now it is possibile to put the board into Deep Sleep move (v low power consumption by long pressing the GPIO0 button for 3s).
   To exit from the deep sleep and turn the controller on, just click on the GPIO35 button.
 
