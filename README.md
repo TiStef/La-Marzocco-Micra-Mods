@@ -1,6 +1,6 @@
 # **La Marzocco Micra Add-Ons**
 
-This repository contains scripts and configuration files designed to integrate the **La Marzocco Micra** espresso machine into a smart home environment using **Home Assistant** and **ESPHome**. These add-ons enhance functionality by enabling real-time monitoring, automation, and machine control.
+This repository contains a sample configuration file designed to integrate the **La Marzocco Micra** espresso machine into a smart home environment using **Home Assistant** and **ESPHome**. These add-ons enhance functionality by enabling real-time monitoring and machine control without the need a phone.
 
 ### Demo Video
 
@@ -10,7 +10,7 @@ This repository contains scripts and configuration files designed to integrate t
 
 ## **Project Overview**
 
-This project connects the La Marzocco Micra to an **ESP32-based LilyGO TTGO T-Display** board, unlocking advanced features for monitoring and control.
+This project connects the La Marzocco Micra to an **ESP32-based LilyGO TTGO T-Display** board, unlocking features for monitoring and control.
 
 ### **Key Features**  
 
@@ -19,26 +19,18 @@ This project connects the La Marzocco Micra to an **ESP32-based LilyGO TTGO T-Di
   - Text sensor data is captured from the La Marzocco Micra and updated dynamically.  
 
 - **Machine Control**  
-  - **GPIO35 Button (ON CLICK)**: Toggles the machine **ON/OFF**.  
+  - **GPIO35 Button (ON CLICK)**: Toggles the machine power **ON/OFF**.  
   - **GPIO0 Button (ON CLICK)**: Enables or disables the **steam boiler**.  
 
 - **Deep Sleep Mode**  
   - **Long Press GPIO0 (3 seconds)**: Puts the ESP32 board into Deep Sleep mode to save battery.  
-  - **Click GPIO35**: Exits Deep Sleep and wakes up the controller.  
+  - **GPIO35 (ON CLICK)**: Exits Deep Sleep and wakes up the controller.  
 
 - **Battery Monitoring and Icons**  
   - Displays battery percentage on the TTGO T-Display screen.  
   - Visual icons indicate:  
-    - **Power ON**  
-    - **Steam Boiler ON**  
-
----
-
-## **Demo Video**
-
-The following video demonstrates the system in action:  
-
-![Demo Video](demo2.gif)  
+    - **Power ON**  : the Micra is powered
+    - **Steam Boiler ON**  : the steam boiler is activated
 
 ---
 
@@ -60,12 +52,12 @@ To get started, you need a working **Home Assistant** setup, which will serve as
 The **ESP32 board** is configured using **ESPHome**, a tool that allows seamless integration with Home Assistant.  
 
 - Install ESPHome: Follow the [ESPHome Getting Started Guide](https://esphome.io/guides/getting_started_command_line).  
-- Flash the ESP32 board with the provided YAML configuration file.  
+- Flash the ESP32 board with the provided YAML configuration file and the other basic info needed (Wifi password, OTA etc).  
 - Modify the configuration to match your environment:  
    - Update entity IDs for switches and text sensors.  
    - Verify GPIO pin mappings.  
 
-Once the board is configured, it will communicate with Home Assistant and display the shot timer on the TTGO screen.
+Once the board is configured, it will communicate with Home Assistant allowing you to control some basic functionality and display the shot timer on the TTGO screen.
 
 ---
 
@@ -75,7 +67,7 @@ Once the board is configured, it will communicate with Home Assistant and displa
 
 1. **LilyGO T-Display ESP32 Board**  
    - Compact and affordable ESP32-based controller with a built-in 1.14" LCD.  
-   - [Purchase Link](https://lilygo.cc/products/lilygo®-ttgo-t-display-1-14-inch-lcd-esp32-control-board).  
+   
 
 2. **LiPO Rechargeable Battery** *(Optional)*  
    - Allows portable operation of the ESP32 board.  
@@ -108,4 +100,4 @@ This project builds upon the exceptional work of **Josef Zweck**, who created th
 ---
 
 **Happy brewing!** ☕  
-Enjoy your enhanced La Marzocco Micra experience.
+
