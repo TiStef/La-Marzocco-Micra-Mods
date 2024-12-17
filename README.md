@@ -4,7 +4,8 @@ This repository contains scripts and configuration files designed to integrate t
 
 ### Demo Video
 
-Watch the demo video on [YouTube]([https://www.youtube.com/watch?v=VIDEO_ID](https://youtube.com/shorts/x1dEXdpyUi8)).
+
+[![Watch the Demo Video](https://img.youtube.com/vi/x1dEXdpyUi8/0.jpg)](https://www.youtube.com/shorts/x1dEXdpyUi8)
 ---
 
 ## **Project Overview**
