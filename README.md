@@ -8,8 +8,14 @@ This project integrates the La Marzocco Micra with Home Assistant and an ESP32-b
   - Text sensor data from the La Marzocco Micra is captured and displayed on the TTGO T-Display screen, allowing real-time monitoring of brewing activity.
   
 - **Machine Control**:
-  - **GPIO35 Button**: Toggles the machine ON/OFF directly from the board.
-  - **GPIO0 Button**: Enables or disables the steam boiler.
+  - **GPIO35 Button (ON CLICK)**: Toggles the machine ON/OFF directly from the board.
+  - **GPIO0 Button (ON CLICK)**: Enables or disables the steam boiler.
+ 
+- **ESP32 board Deep Sleep funcionality**
+  Now it is possibile to put the board into Deep Sleep move (v low power consumption by long pressing the GPIO0 button for 3s).
+  To exit from the deep sleep and turn the controller on, just click on the GPIO35 button.
+
+The controller board now has also residual battery power indicator and two icons to show when the machine is powered on and when the steam boiler is on.
 
 The video below demonstrates the board's functionality and its integration with the La Marzocco Micra:
 
