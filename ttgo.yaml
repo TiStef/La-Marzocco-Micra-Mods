@@ -9,10 +9,6 @@ time:
   - platform: homeassistant
     id: ha_time
 
-# make sure state persists after 10sec of operation:
-#preferences:
-#  flash_write_interval: 10s
-
 globals:
   - id: shot_timer_value
     type: std::string
@@ -24,18 +20,60 @@ globals:
     initial_value: "0"
 
 script:
-  - id: update_display
+  - id: prepare_for_sleep
     then:
-      - lambda: |-
-          id(shottimer_display).update();
+      - deep_sleep.enter: deep_sleep_control # send esp32 to deep sleep:
+
+# enable deep sleep capabilities and set wakeup-pin in energy-efficient ext1 mode
+deep_sleep:
+  id: deep_sleep_control
+  esp32_ext1_wakeup: # uses much less deep sleep power than wakeup_pin:
+    pins:
+      - number: 35
+        allow_other_uses: true
+    mode: ALL_LOW
+
+sensor:
+  # handle voltage sensor
+  - platform: adc
+    pin: GPIO34
+    id: power_voltage
+    name: "Voltage"
+    update_interval: 5s
+    accuracy_decimals: 1
+    attenuation: 12dB
+    samples: 10
+    filters:
+      - multiply: 2.0
+      - median:
+          window_size: 7
+          send_every: 4
+          send_first_at: 3
+
+  # Calculate battery percentage
+  - platform: template
+    id: battery_percentage
+    name: "Battery Percentage"
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    lambda: |-
+      if (id(power_voltage).state <= 3.0) {
+        return 0; // Below 3.0V, battery is considered empty
+      } else if (id(power_voltage).state >= 4.2) {
+        return 100; // Above 4.2V, battery is full
+      } else {
+        // Linear interpolation between 3.0V and 4.2V
+        return (id(power_voltage).state - 3.0) / (4.2 - 3.0) * 100.0;
+      }
+    update_interval: 1s
 
 switch:
   - platform: homeassistant
     id: micra_power
-    entity_id: switch.mrXXXXX # put you HA sensor id for the Micra power switch
+    entity_id: switch.xxxxxxx   # <--- ADD your MICRA/MINI serial
   - platform: homeassistant
     id: steam_boiler
-    entity_id: switch.mrXXXXX_steam_boiler # put you HA sensor id for the Micra boiler switch
+    entity_id: switch.xxxxxxx_steam_boiler  # <--- ADD your MICRA/MINI serial
 
 binary_sensor:
   - platform: gpio
@@ -44,6 +82,8 @@ binary_sensor:
     pin:
       number: GPIO35
       inverted: true
+      allow_other_uses: true
+
     on_click:
       then:
         - switch.toggle: micra_power
@@ -57,16 +97,31 @@ binary_sensor:
     on_click:
       then:
         - switch.toggle: steam_boiler
+    # super long press (<3s) without need to release
+    on_multi_click:
+      - timing:
+          - ON for at least 3.1s
+        then:
+          # invoke deep sleep
+          - script.execute: prepare_for_sleep
 
 text_sensor:
   - platform: homeassistant
     id: shot_timer_sensor
-    entity_id: sensor.mrXXXXX_shot_timer # put you HA sensor id for the Micra shot timer sensor
+    entity_id: sensor.xxxxxxx_shot_timer    # <--- ADD your MICRA/MINI serial
     on_value:
       then:
         - lambda: |-
             id(shot_timer_value) = x;
             id(last_update_time) = millis();  // Record the current time in milliseconds
+  - platform: homeassistant
+    id: steam_boiler_state
+    entity_id: switch.xxxxxxx_steam_boiler  # <--- ADD your MICRA/MINI serial
+    name: "Steam Boiler State"
+  - platform: homeassistant
+    id: power_state
+    entity_id: switch.xxxxxxxx     # <--- ADD your MICRA/MINI serial
+    name: "Machine Power"
 
 spi:
   clk_pin: GPIO18
@@ -93,6 +148,22 @@ display:
       it.printf(it.get_width(), 0, id(latoblackheader), WHITE,TextAlign::TOP_RIGHT, "Micra Shot Timer");
       it.image(10, 42, id(my_image2));
       it.image(10, 0, id(my_image));
+      if (id(power_state).state == "on") {
+         it.image(20, 75, id(mach_on));
+      }
+      if (id(steam_boiler_state).state == "on") {
+        it.image(50, 75, id(steam_on));
+      }
+
+      //it.printf(20,20,id(lato),id(steam_boiler).state);
+
+      // Align Battery Percentage to Bottom-Right
+      int display_width = it.get_width();
+      int display_height = it.get_height();
+      int padding = 0; // Padding from the edge
+
+      it.printf(display_width - padding, display_height - padding, id(latoblack), TextAlign::BOTTOM_RIGHT, "%d%%", (int)id(battery_percentage).state);
+
 
       // Convert shot_timer_value to an integer and add 1 second
       int seconds = atoi(id(shot_timer_value).c_str()) + 1;
@@ -120,6 +191,14 @@ image:
     id: my_image2
     type: RGB24
     resize: 170x170
+  - file: "power.png"
+    id: mach_on
+    type: RGB565
+    resize: 20x20
+  - file: "steam.png"
+    id: steam_on
+    type: RGB565
+    resize: 20x20
 
 font:
   - file:
@@ -137,9 +216,9 @@ font:
   - file:
       type: gfonts
       family: Lato
-      weight: 900
+      weight: 100
     id: latoblack
-    size: 30
+    size: 15
   - file:
       type: gfonts
       family: Lato
