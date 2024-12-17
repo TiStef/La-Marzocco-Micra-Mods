@@ -2,6 +2,9 @@
 
 This repository contains scripts and configuration files designed to integrate the **La Marzocco Micra** espresso machine into a smart home environment using **Home Assistant** and **ESPHome**. These add-ons enhance functionality by enabling real-time monitoring, automation, and machine control.
 
+### Demo Video
+
+Watch the demo video on [YouTube]([https://www.youtube.com/watch?v=VIDEO_ID](https://youtube.com/shorts/x1dEXdpyUi8)).
 ---
 
 ## **Project Overview**
