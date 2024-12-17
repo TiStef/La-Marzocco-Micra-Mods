@@ -1,80 +1,85 @@
-# **La Marzocco Micra Add-Ons**
+Here is the Markdown version of the refined GitHub README:
 
-This repository contains scripts and configuration files designed to enhance the La Marzocco Micra experience. These add-ons allow you to integrate the espresso machine into a smart home environment with **Home Assistant** and **ESPHome**, enabling monitoring and automation capabilities.
+La Marzocco Micra Add-Ons
 
-This project integrates the La Marzocco Micra with Home Assistant and an ESP32-based LilyGO TTGO T-Display to enhance its functionality. Key features include:
+This repository contains scripts and configuration files designed to integrate the La Marzocco Micra espresso machine into a smart home environment using Home Assistant and ESPHome. These add-ons enhance functionality by enabling real-time monitoring, automation, and machine control.
 
-- **Shot Timer Display**: 
-  - Text sensor data from the La Marzocco Micra is captured and displayed on the TTGO T-Display screen, allowing real-time monitoring of brewing activity.
-  
-- **Machine Control**:
-  - **GPIO35 Button (ON CLICK)**: Toggles the machine ON/OFF directly from the board.
-  - **GPIO0 Button (ON CLICK)**: Enables or disables the steam boiler.
- 
-- **ESP32 board Deep Sleep funcionality**:
-  Now it is possibile to put the board into Deep Sleep move (v low power consumption by long pressing the GPIO0 button for 3s).
-  To exit from the deep sleep and turn the controller on, just click on the GPIO35 button.
+Project Overview
 
-The controller board now has also residual battery power indicator and two icons to show when the machine is powered on and when the steam boiler is on.
+This project connects the La Marzocco Micra to an ESP32-based LilyGO TTGO T-Display board, unlocking advanced features for monitoring and control.
 
-The video below demonstrates the board's functionality and its integration with the La Marzocco Micra:
+Key Features
 
-![Demo Video](demo2.gif)
+	•	Shot Timer Display
+	•	Real-time shot timer is displayed on the LilyGO TTGO T-Display.
+	•	Text sensor data is captured from the La Marzocco Micra and updated dynamically.
+	•	Machine Control
+	•	GPIO35 Button (ON CLICK): Toggles the machine ON/OFF.
+	•	GPIO0 Button (ON CLICK): Enables or disables the steam boiler.
+	•	Deep Sleep Mode
+	•	Long Press GPIO0 (3 seconds): Puts the ESP32 board into Deep Sleep mode to save battery.
+	•	Click GPIO35: Exits Deep Sleep and wakes up the controller.
+	•	Battery Monitoring and Icons
+	•	Displays battery percentage on the TTGO T-Display screen.
+	•	Visual icons indicate:
+	•	Power ON
+	•	Steam Boiler ON
 
+Demo Video
 
----
+The following video demonstrates the system in action:
 
-Setting up the system requires some familiarity with network configurations and basic coding, but this guide will walk you through the necessary steps.
+Setup Instructions
 
-#### **Home Assistant Hub**
+1. Home Assistant Hub
 
-To get started, you’ll need to set up a **Home Assistant (HA)** hub. Home Assistant is an open-source home automation platform that acts as the central control system for all smart devices.
+To get started, you need a working Home Assistant setup, which will serve as the central hub.
+	•	Install Home Assistant on a dedicated server, such as a Raspberry Pi.
+	•	Follow the official installation guide here: Home Assistant Raspberry Pi Installation.
+	•	Ensure that the La Marzocco Micra is integrated with Home Assistant using the excellent work by Josef Zweck:
+La Marzocco Integration.
 
-1. Create an account at [Home Assistant](https://www.home-assistant.io).
-2. Set up a dedicated server for the HA hub. A **Raspberry Pi** is a popular choice, offering simplicity and affordability.
-3. Follow the official installation guide for Raspberry Pi: [Home Assistant Raspberry Pi Installation](https://www.home-assistant.io/installation/raspberrypi).
+2. ESPHome Configuration
 
-### **ESPHome**
+The ESP32 board is configured using ESPHome, a tool that allows seamless integration with Home Assistant.
+	•	Install ESPHome: Follow the ESPHome Getting Started Guide.
+	•	Flash the ESP32 board with the provided YAML configuration file.
+	•	Modify the configuration to match your environment:
+	•	Update entity IDs for switches and text sensors.
+	•	Verify GPIO pin mappings.
 
-To integrate an **ESP32 board** with Home Assistant, this project uses **ESPHome**—a simple yet powerful platform for managing ESP-based devices. ESPHome is fully integrated into Home Assistant and requires only a YAML configuration file to get started.
+Once the board is configured, it will communicate with Home Assistant and display the shot timer on the TTGO screen.
 
-ESPHome simplifies communication between the ESP32 and Home Assistant by abstracting low-level details, making it accessible for beginners and robust enough for advanced users.
-How to Set Up ESPHome:
-1. Install ESPHome: [ESPHome Getting Started Guide](https://esphome.io/guides/getting_started_command_line).
-2. Flash the ESP32 board with your configuration file using ESPHome CLI or another flashing method.
+Parts List
 
-The YAML file in the folder shows you how I configured mine. Feel free to modify it according to your needs.
-Once configured, the ESP32 board will communicate seamlessly with your Home Assistant hub.
+Required Components
 
----
+	1.	LilyGO T-Display ESP32 Board
+	•	Compact and affordable ESP32-based controller with a built-in 1.14” LCD.
+	•	Purchase Link.
+	2.	LiPO Rechargeable Battery (Optional)
+	•	Allows portable operation of the ESP32 board.
+	•	⚠️ Ensure compatibility with the board’s voltage and current requirements.
+	3.	USB-C Cable
+	•	Powers the ESP32 board if a battery is not used.
 
-### **Parts List**
+Disclaimer
 
-This project requires just a few components:
-1. **ESP32 Board**  
-   - I recommend the [LilyGO T-Display ESP32](https://lilygo.cc/products/lilygo®-ttgo-t-display-1-14-inch-lcd-esp32-control-board) for its affordability, compact size, and compatibility with USB-C and battery power. The built-in 1.14-inch LCD is an added bonus for displaying real-time data.
-   
-2. **Power Source**  
-   - If you plan to use the ESP32 board with a **LiPO rechargeable battery**, ensure the battery is compatible with the board’s voltage and current requirements.
-   - ⚠️ *Each board has different power requirements. Seek expert advice or refer to the board’s specifications to select a suitable battery.*
+⚠️ Important Notes:
+	•	The author is not responsible for any damage to you, your devices, or your surroundings caused by recreating this project or any part of it.
+	•	Reproducing this project involves working with electrical circuits and batteries, which may pose safety risks if mishandled.
+	•	Follow all safety guidelines, consult hardware documentation, and take appropriate precautions.
+	•	Use this project entirely at your own risk.
 
----
+This project is shared for educational purposes only. The author assumes no liability for misuse.
 
-## **Disclaimer**
-Recreating this project involves working with potentially hazardous components, such as batteries and electrical circuits. It is strongly advised that only individuals with sufficient expertise in handling such components attempt to replicate this project.
+Special Thanks
 
-**Important Notes**
-- The author is not responsible for any damage to you, your devices, or your surroundings caused by recreating this project or any part of it.
-- If you choose to replicate this project, you do so entirely at your own risk.
-- This project involves working with electronic components and batteries, which may pose safety risks if not handled properly.
-- Ensure you follow all safety guidelines and consult the board’s documentation before proceeding.
-
-This project is shared for educational purposes only, and the author does not assume any liability for its use or misuse.
-
----
-
-## Special thanks
-This little add-on was only possibile thanks to the amazing work Josef Zweck (https://github.com/zweckj) did for the La Marzocco integration into Home Assistant: https://github.com/zweckj/lamarzocco
-Thanks to him, Home Assistant and ESPHome!
+This project builds upon the exceptional work of Josef Zweck, who created the La Marzocco integration for Home Assistant.
+	•	GitHub: Josef Zweck
+	•	Project: La Marzocco Integration
 
 Happy brewing! ☕
+Enjoy your enhanced La Marzocco Micra experience.
+
+This Markdown version is clean, organized, and ready to be pasted into your GitHub README. Let me know if you need any further adjustments! 🚀
