@@ -122,6 +122,14 @@ text_sensor:
     id: power_state
     entity_id: switch.xxxxxxxx     # <--- ADD your MICRA/MINI serial
     name: "Machine Power"
+  - platform: homeassistant
+    id: water_tank
+    entity_id: binary_sensor.mr028356_water_tank_empty
+    name: "Water Tank Refill"
+  - platform: homeassistant
+    id: coffee_temps
+    entity_id: sensor.mr028356_current_coffee_temperature
+    name: "Coffee Temp"
 
 spi:
   clk_pin: GPIO18
@@ -154,6 +162,10 @@ display:
       if (id(steam_boiler_state).state == "on") {
         it.image(50, 75, id(steam_on));
       }
+      if (id(water_tank).state == "on") {
+        it.image(95, 75, id(no_water));
+        it.printf(120, 78, id(latoblack), BLUE, "Refill water tank");
+      }
 
       //it.printf(20,20,id(lato),id(steam_boiler).state);
 
@@ -179,6 +191,12 @@ display:
         // Display the ready message
         
         it.printf(130, 40, id(latoblackheader), ORANGE, "..ready!");
+        if (id(power_state).state == "on") {
+         
+         float temp = atof(id(coffee_temps).state.c_str());
+         it.printf(140, 30, id(latoblack),WHITE, "%.1f°C", temp);
+        }
+        
         
       }
 
