@@ -27,10 +27,12 @@ This project connects the La Marzocco Micra to an **ESP32-based LilyGO TTGO T-Di
   - **GPIO35 (ON CLICK)**: Exits Deep Sleep and wakes up the controller.  
 
 - **Battery Monitoring and Icons**  
-  - Displays battery percentage on the TTGO T-Display screen.  
+  - Displays battery percentage on the TTGO T-Display screen.
+  - Displays coffee boiler temperature (not the one set by the user, but the effective one at the coffee boiler)  
   - Visual icons indicate:  
     - **Power ON**  : the Micra is powered
     - **Steam Boiler ON**  : the steam boiler is activated
+    - **Refill Water Tank**: icon and alert messages pops if water tank needs refill
 
 ---
 
